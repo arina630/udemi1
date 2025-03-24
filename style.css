@@ -1,0 +1,681 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url(/assets/fonts/Poppins-Regular.woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url(/assets/fonts/DMSans18pt-Regular.woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill='none'], [fill^='url'])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke='none'], [stroke^='url'])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --color-dark: #00353b;
+  --color-light: #ffffff;
+  --color-pink: #fcd8ca;
+  --color-light-green: #22a45a;
+  --color-button: #1f2937;
+  --color-title: #1f2937;
+  --color-subtitle: #4b5563;
+  --button-radius: 8px;
+  --smaller-button-radius: 4px;
+
+  --font-family-base: 'DM Sans', sans-serif;
+  --font-family-accent: 'Poppins', sans-serif;
+
+  --button-height: 50px;
+  --smaller-button-height: 30px;
+
+  --container-width: 1280px;
+  --container-padding-x: 15px;
+
+  --transition-duration: 0.2s;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-light);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: var(--font-family-accent);
+}
+
+.button {
+  padding-inline: 25px;
+  padding-block: 13px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
+
+.small-button {
+  padding-inline: 8px;
+  padding-block: 4px;
+  border-radius: 4px;
+}
+
+.header {
+  background-color: var(--color-dark);
+}
+
+.header-create {
+  position: relative;
+  padding-block: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-light);
+}
+
+.header-first {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-subtitle);
+}
+
+.header-cross-img {
+  position: absolute;
+  padding-right: 40px;
+  right: 0;
+}
+
+.header-menu-list-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  color: var(--color-light);
+  font-size: 16px;
+  background-color: var(--color-dark);
+}
+
+.header-menu-list {
+  display: flex;
+  row-gap: 25px;
+  padding-inline: 30px;
+}
+
+.header-item {
+  padding-inline: 25px;
+  display: inline-block;
+}
+
+.header-line {
+  width: 100%;
+  border-top: 2px solid var(--color-light);
+}
+
+.action-block {
+  position: absolute;
+  right: 0;
+  padding-right: 80px;
+}
+
+.action-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-list-item {
+  position: relative;
+  color: var(--color-light);
+  text-decoration: none;
+}
+
+.header-search::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 112px;
+  width: 19px;
+  height: 29px;
+  background-image: url(/assets/icons/search.svg);
+  background-repeat: no-repeat;
+}
+
+.header-cart::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 63px;
+  width: 19px;
+  height: 29px;
+  background-image: url(/assets/icons/shopping_cart.svg);
+  background-repeat: no-repeat;
+}
+
+.header-cart {
+  color: var(--color-light);
+  text-decoration: none;
+  margin-right: 24px;
+}
+
+.header-search {
+  color: var(--color-light);
+  text-decoration: none;
+  margin-right: 53px;
+}
+
+.sign-up-button {
+  height: var(--button-height);
+  width: 105px;
+  border-radius: var(--button-radius);
+  color: var(--color-button);
+  border: 0;
+}
+
+.container-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 53px;
+  margin-bottom: 73px;
+}
+
+.header-container {
+  width: 600px;
+  height: 400px;
+  margin-right: 80px;
+}
+
+.header-title {
+  font-size: 56px;
+  color: var(--color-light);
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  color: var(--color-light);
+  margin-bottom: 40px;
+}
+
+.explore-button {
+  height: var(--button-height);
+  width: 172px;
+  background-color: var(--color-light-green);
+  border-radius: var(--button-radius);
+  border: solid 1px var(--color-light-green);
+  color: var(--color-light);
+  font-size: 16px;
+  margin-right: 16px;
+}
+
+.header-buttons {
+ display: flex;  /* может можно было так же сделать с search cart? */
+  align-items: center;
+}
+
+.watch-button {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--color-light);
+}
+
+.img-watch-vedeo {
+  margin-left: 4px;
+}
+
+.header-reviews {
+  display: flex;
+  align-items: center;
+  padding-top: 48px;
+}
+
+.header-img-reviews {
+  width: 160px;
+  height: 48px;
+}
+
+.reviews-block-with-stars {
+  display: flex;
+  padding-left: 24px;
+}
+
+.header-review-star {
+  width: 24px;
+  height: 24px;
+  padding-right: 3px;
+}
+
+.reviews-with-stars-3k {
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+.reviews-description {
+  color: var(--color-light);
+}
+
+.wrapper-for-before {
+  position: relative;
+}
+
+.header-img-container::before {
+  content: "";
+  position: absolute;
+  top: 328px;
+  left: -104px;
+  width: 209px;
+  height: 250px;
+  background-image: url(/assets/icons/IMAGE.svg);
+}
+
+.heder-text-bottom {
+  text-align: center;
+  color: var(--color-light);
+  padding-bottom: 355px;
+}
+
+.no-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 64px;
+  margin-top: -200px;
+  border-radius: 24px;
+  background-color: #FCD8CA;
+}
+
+.no-code-button-white {
+  font-size: 14px;
+  margin-bottom: 11px;
+  border: none;
+  color: var(--color-button);
+}
+
+.no-code-education-title {
+  font-family: var(--font-family-accent);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-title);
+}
+
+.no-code-education-subt {
+  text-align: center;
+  margin-inline: 275px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  color: #374151;
+}
+
+.no-code-button-dark {
+  width: 117px;
+  height: 50px;
+  font-size: 16px;
+  background-color: var(--color-button);
+  border: 1px solid var(--color-button);
+  border-radius: var(--button-radius);
+  color: var(--color-light);
+}
+
+.courses {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 130px;
+}
+
+.wraapp-premium-courses {
+  padding-left: 130px;
+}
+
+.courses-title {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  color: var(--color-title);
+}
+
+.courses-subtitle {
+  margin-bottom: 39px;
+  color: var(--color-subtitle);
+}
+
+.button-wrapp-courses {
+  display: flex;
+  align-items: center;
+}
+
+.courses-button {
+  color: var(--color-light);
+  background-color: var(--color-button);
+  font-size: 16px;
+  margin-right: 16px;
+}
+
+.courses-link {
+  text-decoration: none;
+  color: #111827;
+  font-size: 16px;
+  text-align: center;
+  margin-right: 4px;
+}
+
+.courses-learn-more-img {
+  padding-inline: 8px;
+  padding-block: 12px;
+}
+
+.most-popular-courses {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wraapp-easily-courses {
+  padding-right: 130px;
+}
+
+.popular-courses-desc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 768px;
+  height: 180px;
+}
+
+.trending-button {
+  color: var(--color-button);
+  background-color: #FCD8CA;
+  font-size: 14px;
+  border: none;
+  margin-bottom: 11px;
+}
+
+.popular-courses-title {
+  font-size: 48px;
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 29px;
+}
+
+.popular-courses-desc {
+  font-size: 18px;
+  color: var(--color-subtitle);
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 65px;
+}
+
+.buy-popular-corses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 35px;
+}
+
+.buy-card {
+  height: 500px;
+  width: 405px;
+  border-radius: 16px;
+  background-color: var(--color-dark);
+}
+
+.information-price-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  row-gap: 15px;
+  margin-top: 32px;
+  margin-left: 25px;
+}
+
+.name-pupel-holder {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 4px;
+  border-radius: 4px;
+  width: 77px;
+  height: 29px;
+  background-color: var(--color-light);
+  color: var(--color-button);
+}
+
+.name-of-course {
+  font-size: 24px;
+  font-family: var(--font-family-accent);
+  line-height: 1.4;
+  color: var(--color-light);
+}
+
+.enroll-img-wrap {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 29px;
+  margin-top: 44px;
+}
+
+.enroll-button {
+  padding-block: 9px;
+  padding-inline: 21px;
+  margin-left: 24px;
+  color: var(--color-light);
+  white-space: nowrap;
+  background-color: var(--color-light-green);
+  border-radius: var(--button-radius);
+  border: 1px solid var(--color-light-green); 
+  font-size: 16px;
+}
+
+.enroll-course-img-bag {
+  margin-left: 1px;
+}
