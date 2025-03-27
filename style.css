@@ -736,3 +736,34 @@ h6 {
   width: 100%;
   margin-right: -15px;
 }
+
+.action-buy {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 190px;
+  column-gap: 48px;
+}
+
+.action-buy-img {
+  /* width: 48px; */
+  margin-bottom: 32px;
+}
+
+.action-buy-title {
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--color-button);
+  margin-bottom: 24px;
+}
+
+.action-buy-subtitle {
+  font-size: 16px;
+  color: var(--color-subtitle);
+}
+
+
+.benefits-button {
+  
+}
