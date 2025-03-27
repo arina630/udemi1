@@ -622,6 +622,7 @@ h6 {
   justify-content: center;
   align-items: center;
   column-gap: 35px;
+  margin-bottom: 128px;
 }
 
 .buy-card {
@@ -629,10 +630,11 @@ h6 {
   width: 405px;
   border-radius: 16px;
   background-color: var(--color-dark);
+  overflow: hidden;
 }
 
 .information-price-wrap {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   row-gap: 15px;
   margin-top: 32px;
@@ -642,8 +644,6 @@ h6 {
 .name-pupel-holder {
   font-size: 14px;
   text-align: center;
-  padding-top: 4px;
-  border-radius: 4px;
   width: 77px;
   height: 29px;
   background-color: var(--color-light);
@@ -657,17 +657,22 @@ h6 {
   color: var(--color-light);
 }
 
+.prise-holder {
+  color: white;
+}
+
 .enroll-img-wrap {
   display: flex;
   align-items: flex-end;
-  column-gap: 29px;
-  margin-top: 44px;
+  column-gap: 30px;
+  margin-top: 45px;
 }
 
 .enroll-button {
   padding-block: 9px;
   padding-inline: 21px;
   margin-left: 24px;
+  margin-bottom: 32px;
   color: var(--color-light);
   white-space: nowrap;
   background-color: var(--color-light-green);
@@ -677,5 +682,57 @@ h6 {
 }
 
 .enroll-course-img-bag {
-  margin-left: 1px;
+  margin-left: 2px;
+}
+
+.enroll-course-img-first {
+  margin-top: 34px;
+}
+
+.join-us {
+  display: flex;
+  margin-bottom: 80px;
+  border-radius: 24px;
+  background-color: #FCD8CA;
+}
+
+.wrap-join-us {
+  padding-left: 64px;
+  padding-bottom: 64px;
+  padding-top: 68px;
+}
+
+.join-us-holder {
+  width: 63px;
+  height: 29px;
+  font-size: 14px;
+  margin-bottom: 11px;
+  background-color: var(--color-light);
+}
+
+.join-us-title {
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 400;
+  padding-bottom: 28px;
+  padding-right: 98px;
+  color: var(--color-button);
+}
+
+.jouin-us-subtitle {
+  font-size: 18px;
+  padding-right: 96px;
+  margin-bottom: 39px;
+  color: #374151;
+}
+
+.join-us-button {
+  font-size: 16px;
+  background-color: var(--color-button);
+  color: var(--color-light);
+}
+
+.join-us-img {
+  width: 100%;
+  margin-right: -15px;
 }
