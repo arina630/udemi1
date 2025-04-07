@@ -1047,11 +1047,11 @@ h6 {
 .start {
   padding-top: 128px;
   background-color: var(--color-dark);
+  padding-bottom: 190px;
 }
 
 .start-wrapp {
   text-align: center;
-  margin-bottom: 105px;
 }
 
 .start-title {
@@ -1080,4 +1080,89 @@ h6 {
   font-size: 16px;
   color: var(--color-button);
   background-color: var(--color-light);
+}
+
+.footer {
+  background-color: var(--color-dark);
+}
+
+.information-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 110px
+}
+
+.input-block {
+  margin-right: 80px;
+  color: var(--color-light);
+}
+
+.join-input-text {
+  font-size: 16px;
+  margin-bottom: 23px;
+}
+
+.footer-subscribe {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.footer-subscribe-input {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  width: 260px;
+}
+
+.button-subscribe {
+  font-size: 15px;
+  color: var(--color-light);
+  background-color: var(--color-light-green);
+}
+
+.under-footer-form-privacy {
+  font-size: 12px;
+}
+
+.information-about-list {
+  display: flex;
+  gap: 48px;
+}
+
+.footer-list {
+  width: 164px;
+}
+
+.footer-list-item {
+  margin-bottom: 16px;
+}
+
+.footer-list-item:first-child {
+  margin-bottom: 32px;
+}
+
+.footer-list-item-link {
+  font-size: 14px;
+  color: var(--color-light);
+  text-decoration: none;
+}
+
+.footer-list-item-link-first {
+  font-size: 16px;
+}
+
+.prod-by-block {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: var(--color-light);
+}
+
+.footer-social-wrapper {
+  display: flex;
+  gap: 8px;
 }
